@@ -1,6 +1,5 @@
 package com.fawry.ecommerce.model.product;
 
-import com.fawry.ecommerce.model.Shippable;
 import java.time.LocalDate;
 
 /**

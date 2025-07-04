@@ -1,7 +1,5 @@
 package com.fawry.ecommerce.model.product;
 
-import com.fawry.ecommerce.model.Shippable;
-
 /**
  * TV product - non-expirable but requires shipping
  */

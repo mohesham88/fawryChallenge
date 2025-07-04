@@ -1,4 +1,4 @@
-package com.fawry.ecommerce.model;
+package com.fawry.ecommerce.model.product;
 
 import java.time.LocalDate;
 

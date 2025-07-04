@@ -1,4 +1,4 @@
-package com.fawry.ecommerce.model;
+package com.fawry.ecommerce.model.product;
 
 /**
  * Interface for products that require shipping

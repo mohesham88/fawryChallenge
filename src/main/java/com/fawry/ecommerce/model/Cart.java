@@ -42,27 +42,27 @@ public class Cart {
         int existingQuantity = 0;
         if(existingItem.isPresent()) {existingQuantity = existingItem.get().getQuantity();}
 
+
+
         // Check if product is available
-        if (!product.isAvailable(quantity)) {
+        if (!product.isAvailable(quantity + existingQuantity)) {
             if (product.isOutOfStock()) {
                 throw new InsufficientStockException("Product " + product.getName() + " is out of stock");
+            }else if(quantity + existingQuantity > product.getQuantity()) {
+                throw new InsufficientStockException("Product " + product.getName() + " has only " + quantity + " available");
             }
-            // It maybe not available due it being expired
-            // Check if product is expired (if it's expirable)
-            if (product instanceof com.fawry.ecommerce.model.product.ExpirableProduct) {
-                com.fawry.ecommerce.model.product.ExpirableProduct expirable =
-                        (com.fawry.ecommerce.model.product.ExpirableProduct) product;
-                if (expirable.isExpired()) {
-                    throw new ProductExpiredException("Product " + product.getName() + " is expired");
+            else {
+                // it might be due to the product being expired
+                // check if product is expired
+                if (product instanceof com.fawry.ecommerce.model.product.ExpirableProduct) {
+                    com.fawry.ecommerce.model.product.ExpirableProduct expirable =
+                            (com.fawry.ecommerce.model.product.ExpirableProduct) product;
+                    if (expirable.isExpired()) {
+                        throw new ProductExpiredException("Product " + product.getName() + " is expired");
+                    }
                 }
             }
-
         }
-        if(quantity + existingQuantity > product.getQuantity()) {
-            throw new InsufficientStockException("Product " + product.getName() + " has only " + product.getQuantity() + " in stock");
-        }
-
-        
 
         if (existingItem.isPresent()) {
             existingItem.get().addQuantity(quantity);
